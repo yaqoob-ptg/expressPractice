@@ -29,6 +29,11 @@ const userSchema = new mongoose.Schema({
     updatedAt:{
         type:Date,
        default:()=>Date.now(),
+    },
+    address:{
+        street:String,
+        city:String,
+        country:String,
     }
 
 })
