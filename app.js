@@ -161,10 +161,22 @@ getUser('68aafb2dba4510b9bc4ca2ae')
 async function getUser(id) {
    try {
       // const user = await userModel.findById(id)                //find with the same id
-      const user = await userModel.find({name:new RegExp("yaqoob", 'i')})       //find all user with the same field if exists //regex used for case insensitive 
+      // const user = await userModel.find({name:new RegExp("yaqoob", 'i')})       //find all user with the same field if exists //regex used for case insensitive 
       // const user = await userModel.findOne({name:'Yaqoob'})    //find the first one with the field
       // const user = await userModel.exists({name:'Yaqoob'})    //return bool if exists
       // const user = await userModel.deleteMany({name:'Yaqoob'}) //delete all with name Yaoob
+      
+      //query
+      // const user =await userModel.where("name").equals('yaqoob')
+      const user =await userModel
+      .where("age") //field name
+      .lt(12) //less than
+      .gt(0) //greater than
+      .where('name')
+      .equals(RegExp("Yaqoob","i"))
+      .limit(2) //array limts
+      .select('name').select('age') //only fileds
+
       console.log(user);
    }
    catch (e) {
@@ -174,7 +186,7 @@ async function getUser(id) {
 
 // createUser();
 // async function createUser(){
-//  try{   const user = await userModel.create({name:'yaqoob',age:1,email:"TEST@EMAIL.COM",address:{street:'main st',city:'Karachi'}})
+//  try{   const user = await userModel.create({name:'Yaqoob',age:1,email:"TEST@EMAIL.COM",address:{street:'main st',city:'Karachi'}})
 //     user.createdAt=5
 //     await user.save()
 //     console.log(user)}
